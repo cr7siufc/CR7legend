@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CR7 Legend</title>
+    <title>CR7 Legend - Spin & Earn</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>⚽ CR7 Legend ⚽</h1>
-        <p>Collect CR7 Coins and become the ultimate Ronaldo fan!</p>
-        
-        <div class="stats">
-            <p>CR7 Coins: <span id="coins">0</span></p>
-            <p>Level: <span id="level">1</span></p>
+        <h1>⚽ CR7 Legend - Spin & Earn 🎰</h1>
+        <p>Spin the machine and win CR7 Coins!</p>
+
+        <div class="slot-machine">
+            <div class="reel-container">
+                <div class="reel" id="reel1"></div>
+            </div>
+            <div class="reel-container">
+                <div class="reel" id="reel2"></div>
+            </div>
+            <div class="reel-container">
+                <div class="reel" id="reel3"></div>
+            </div>
         </div>
 
-        <button id="spinButton">🎰 Spin & Earn</button>
+        <button id="spinButton">🎰 Spin Now</button>
         <p id="spinResult"></p>
 
-        <button id="mineButton">⛏️ Mine CR7 Coins</button>
-        <p id="mineResult"></p>
-
-        <div class="upgrades">
-            <h3>Upgrades</h3>
-            <button id="upgradeSpin">Upgrade Spin (100 CR7 Coins)</button>
-            <button id="upgradeMine">Upgrade Mining (200 CR7 Coins)</button>
-        </div>
+        <p>CR7 Coins: <span id="coins">0</span></p>
     </div>
 
     <script src="game.js"></script>
