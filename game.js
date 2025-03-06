@@ -1,4 +1,8 @@
 let coins = 0;
+let level = 1;
+let lastMineTime = 0;
+const miningCooldown = 12 * 60 * 60 * 1000; // 12 hours
+
 const symbols = [
     { name: "CR7 Jersey", value: 1000, image: "jersey.png" },
     { name: "Football", value: 500, image: "football.png" },
@@ -13,18 +17,18 @@ const symbols = [
 const spinButton = document.getElementById("spinButton");
 const spinResult = document.getElementById("spinResult");
 const coinsDisplay = document.getElementById("coins");
+const levelDisplay = document.getElementById("level");
+const mineButton = document.getElementById("mineButton");
+const miningStatus = document.getElementById("miningStatus");
+const upgradeButton = document.getElementById("upgradeButton");
+
 const reels = [
     document.getElementById("reel1"),
     document.getElementById("reel2"),
     document.getElementById("reel3")
 ];
 
-// Load initial slot images
-reels.forEach(reel => {
-    reel.style.backgroundImage = `url('${symbols[Math.floor(Math.random() * symbols.length)].image}')`;
-});
-
-// Function to spin reels
+// Spin Function
 spinButton.addEventListener("click", () => {
     spinButton.disabled = true;
     spinResult.innerText = "Spinning...";
@@ -36,27 +40,36 @@ spinButton.addEventListener("click", () => {
         let randomIndex = Math.floor(Math.random() * symbols.length);
         results.push(symbols[randomIndex]);
         
-        // Animate reel spin
-        reel.style.transform = `translateY(-${Math.random() * 400}px)`;
-
-        setTimeout(() => {
-            reel.style.backgroundImage = `url('${symbols[randomIndex].image}')`;
-            reel.style.transform = `translateY(0)`;
-        }, 1000 + (index * 200));
+        reel.style.backgroundImage = `url('${symbols[randomIndex].image}')`;
     });
 
     setTimeout(() => {
-        if (results[0].name === results[1].name && results[1].name === results[2].name) {
-            totalWin = results[0].value * 3; // Jackpot
-        } else if (results[0].name === results[1].name || results[1].name === results[2].name) {
-            totalWin = results[1].value * 2; // Partial match
-        } else {
-            totalWin = results[0].value;
-        }
-
+        totalWin = results.reduce((sum, item) => sum + item.value, 0);
         coins += totalWin;
         coinsDisplay.innerText = coins;
         spinResult.innerText = totalWin > 0 ? `You won ${totalWin} CR7 Coins! 🎉` : "Better luck next time!";
         spinButton.disabled = false;
-    }, 1500);
+    }, 1000);
+});
+
+// Mining Function
+mineButton.addEventListener("click", () => {
+    if (Date.now() - lastMineTime >= miningCooldown) {
+        lastMineTime = Date.now();
+        coins += 200;
+        coinsDisplay.innerText = coins;
+        miningStatus.innerText = "You mined 200 CR7 Coins!";
+    } else {
+        miningStatus.innerText = "⏳ Come back in 12 hours!";
+    }
+});
+
+// Upgrade Function
+upgradeButton.addEventListener("click", () => {
+    if (coins >= 500) {
+        coins -= 500;
+        level++;
+        coinsDisplay.innerText = coins;
+        levelDisplay.innerText = level;
+    }
 });

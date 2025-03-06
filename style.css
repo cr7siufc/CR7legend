@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #1a1a1a;
+    background-color: #121212;
     color: white;
 }
 
@@ -14,6 +14,7 @@ body {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Slot Machine */
 .slot-machine {
     display: flex;
     justify-content: center;
@@ -61,8 +62,14 @@ button:hover {
     background-color: darkorange;
 }
 
-#spinResult {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 15px;
+/* Mining & Upgrade Section */
+.mining, .upgrade {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+h2 {
+    color: gold;
 }
